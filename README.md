@@ -15,20 +15,7 @@
 
 3.鼠标移入`<i class="el-icon-zoom-in">`、`<i class="el-icon-delete">`(查看/删除图标),仍显示蒙层,即需在两标签绑定`imgEnter`
 
-```javascript
-data(){
-    return {
-        urlArray:[],        // 已上传的图片 电子合同详情接口返回数据
-
-        maskShowArray: [],  // 需要显示的图片蒙层数组
-        maskShow: false,    // 蒙层显示
-
-        // 预览图片
-        dialogImageUrl: '',
-        dialogVisible: false,
-    }
-}
-```
+**html**
 
 ```html
 <div class="img-wrap">
@@ -50,24 +37,41 @@ data(){
 </el-dialog>
 ```
 
+**script**
+
 ```javascript
-      // 鼠标移入移出图片
-    imgEnter(index) {
-      if (this.maskShowArray.includes(index)) return
-      this.maskShowArray.push(index)
+    data(){
+        return {
+            urlArray:[],        // 已上传的图片 电子合同详情接口返回数据
+
+            maskShowArray: [],  // 需要显示的图片蒙层数组
+            maskShow: false,    // 蒙层显示
+
+            // 预览图片
+            dialogImageUrl: '',
+            dialogVisible: false,
+        }
     },
-      imgLeave(index) {
-      const i = this.maskShowArray.indexOf(index)
-      this.maskShowArray.splice(i, 1)
-    },
-      // 删除图片
-    deletePic(index) {
-      this.urlArray.splice(index, 1)
-    },
-      // 预览图片
-    previewPic(url, index) {
-      this.dialogImageUrl =  url
-      this.dialogVisible = true
-      this.imgLeave(index)
+    methods:{
+        // 鼠标移入移出图片
+        imgEnter(index) {
+          if (this.maskShowArray.includes(index)) return
+          this.maskShowArray.push(index)
+        },
+          imgLeave(index) {
+          const i = this.maskShowArray.indexOf(index)
+          this.maskShowArray.splice(i, 1)
+        },
+          // 删除图片
+        deletePic(index) {
+          this.urlArray.splice(index, 1)
+        },
+          // 预览图片
+        previewPic(url, index) {
+          this.dialogImageUrl =  url
+          this.dialogVisible = true
+          this.imgLeave(index)
+        }
     }
+
 ```
